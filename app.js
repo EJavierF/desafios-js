@@ -1,27 +1,71 @@
-let nombre = prompt("Hola! ingresa tu nombre por favor: ");
-let num1 = prompt("Ingresa el primer número");
-let num2 = prompt("Ingresa el segundo número");
+const suma = (a, b) => {
+    let result = a + b;
+    return result;
+};
 
-if (nombre == "" || num1 == "" || num2 == "") {
-    alert("por favor responde a todos los carteles");
+const resta = (a, b) => {
+    let result = a - b;
+    return result;
+};
+
+const multi = (a, b) => {
+    result = a * b;
+    return result;
+};
+
+//corregir, seguro que así no anda
+const fibonacci = (a) => {
+    let numAnt = 1;
+    let resulString = "";
+
+    for (let i = 0; i < a; i++) {
+        resulString = numAnt + " " + resulString;
+        numAnt = parseInt(numAnt) + parseInt(i);
+    }
+    return resulString;
+};
+
+let nombre = prompt("Hola! Dime tu nickname ");
+if (nombre == "") {
+    nombre = "Ignoto";
+}
+
+do {
+    let oper_raw = prompt(`¿qué quieres hacer ${nombre}? \n S - Suma \n R - Resta \n M - Multiplicación \n F - Fibonacci`);
+    oper = oper_raw.toUpperCase();
+} while (oper != "S" && oper != "R" && oper != "M" && oper != "F");
+
+let num1 = prompt("Escribe un número");
+let num2;
+if (oper != "F") {
+    num2 = prompt("Escribe otro número");
+}
+
+if (num1 == "" || (num2 == "" && oper != "F")) {
+    alert(`${nombre}!!! Escribe todos los valores!!`);
 } else {
     let num_1 = Number(num1);
     let num_2 = Number(num2);
-    let alerta = prompt("Ingresa 1 si prefieres un cartel o 2 si prefieres ver en consola");
 
-    if (alerta == 2) {
-        console.log("Hola " + nombre);
-        console.log("Ingresaste los números: " + num1 + " y " + num2);
-        console.log("La suma de tus números es: " + (num_1 + num_2));
-        console.log("La resta entre el primer número y el segundo es: " + (num_1 - num_2));
-        console.log("La multiplicación tus números es: " + num_1 * num_2);
-    } else if (alerta == 1) {
-        alert(
-            ` Hola ${nombre} \n ingresaste los números  ${num_1} y ${num_2}\n La suma de tus números es: ${num_1 + num_2} \n La resta entre el primer número y el segundo es: ${
-                num_1 - num_2
-            } \n La multiplicación tus números es: ${num_1 * num_2}`
-        );
-    } else {
-        alert("Por favor elige una opcion para ver los resultados");
+    switch (oper) {
+        case "S":
+            let totalsum = suma(num_1, num_2);
+            console.log("La suma de tus números es: ", totalsum);
+            break;
+        case "R":
+            let totalres = resta(num_1, num_2);
+            console.log("La resta entre el primer número y el segundo es: ", totalres);
+            break;
+        case "M":
+            let totalmul = multi(num_1, num_2);
+            console.log("La multiplicación tus números es: ", totalmul);
+            break;
+        case "F":
+            let serieFib = fibonacci(num_1);
+            console.log("La serie Fibonacci de ", num_1, " repeticiones es: ", serieFib);
+            break;
+
+        default:
+            break;
     }
 }
